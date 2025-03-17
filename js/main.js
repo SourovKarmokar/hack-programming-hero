@@ -11,7 +11,7 @@ function loadMilestones (){
         return `<div class="milestone border-b">
             <div class="flex">
               <div class="checkbox"><input type="checkbox" /></div>
-              <div>
+              <div onclick ="openMilestone(this)">
                 <p>
                   ${milestone.name}
                   <span><i class="fas fa-chevron-down"></i></span>
@@ -19,9 +19,12 @@ function loadMilestones (){
               </div>
             </div>
             <div class="hidden_panel">
-              <div class="module border-b">
-                <p>Module Name</p>
-              </div>
+              ${milestone.modules.map(function(module){
+                 return `<div class = "module border-b "> 
+                 <p>${module.name} </p>
+                 </div>`;
+              
+              }).join(" ")};
             </div>
           </div>`;
 
@@ -29,5 +32,12 @@ function loadMilestones (){
 
 
     
+}function openMilestone (milestoneElement){
+  const currentPanel = milestoneElement.parentNode.nextElementSibling ;
+
+  currentPanel.classList.toggle('show');
+
 }
+
+
 loadMilestones ()
